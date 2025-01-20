@@ -13,7 +13,7 @@ RUN apt-get update -y \
     && cd practica_creativa2/bookinfo/src/productpage \
     && pip install -r requirements.txt
 
-# Exponemos el puerto en el que se ejecutará la aplicación
+# Indica el puerto accesible
 EXPOSE 9080
 # Ejecutamos la aplicación en el puerto 9080
 CMD python3 practica_creativa2/bookinfo/src/productpage/productpage.py 9080

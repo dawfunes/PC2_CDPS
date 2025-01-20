@@ -7,7 +7,7 @@ WORKDIR /opt/microservices
 ENV SERVICE_VERSION = v1
 ENV ENABLE_EXTERNAL_BOOK_SERVICE = true
 
-# Exponemos el puerto 9080
+# Indica el puerto accesible
 EXPOSE 9080
 
 # Instalamos las dependencias

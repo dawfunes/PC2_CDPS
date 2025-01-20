@@ -12,7 +12,7 @@ RUN apt-get update -y \
     && apt-get install -y git \
     && git clone https://github.com/CDPS-ETSIT/practica_creativa2 
 
-# Exponemos el puerto en el que se ejecutará la aplicación
+# Indica el puerto accesible
 EXPOSE 9080
 
 # Copiamos los ficheros ratings.js y package.json
