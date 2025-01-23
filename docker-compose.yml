@@ -2,22 +2,27 @@ version: '3.9'
 
 services:
   productpage-43:
-    image: "g43/productpage:latest"
+    build: 
+      context: .
+      dockerfile: ProductPage/Dockerfile
     ports: 
       - "9080:9080"
-    environment:
-
   details-43:
-    image: "g43/details:latest"
-    environment:
+     build: 
+      context: .
+      dockerfile: Details/Dockerfile
+     environment:
       - SERVICE_VERSION=v1
       - ENABLE_EXTERNAL_BOOK_SERVICE=true
   
-  reviews-43:
-    image: "g43/reviews:latest"
-    environment:
-      - SERVICE_VERSION=v1
-      - ENABLE_RATINGS=true  
-
   ratings-43:
-    image: "g43/ratings:latest"  
+     build: 
+      context: .
+      dockerfile: Ratings/Dockerfile
+     environment:
+      - SERVICE_VERSION=v1
+      - ENABLE_RATINGS=true
+  reviews-43:
+     image: "g43/ratings:latest"
+    
+
