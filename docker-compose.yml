@@ -5,12 +5,18 @@ services:
     build: 
       context: .
       dockerfile: ProductPage/Dockerfile
+    container_name: productpage-43
+    image: 
+      g43/productpage
     ports: 
       - "9080:9080"
   details-43:
      build: 
       context: .
       dockerfile: Details/Dockerfile
+     container_name: details-43
+     image: 
+      g43/details
      environment:
       - SERVICE_VERSION=v1
       - ENABLE_EXTERNAL_BOOK_SERVICE=true
@@ -19,10 +25,18 @@ services:
      build: 
       context: .
       dockerfile: Ratings/Dockerfile
+     container_name: ratings-43
+     image: 
+      g43/ratings
      environment:
       - SERVICE_VERSION=v1
       - ENABLE_RATINGS=true
   reviews-43:
-     image: "g43/ratings:latest"
+     container_name: reviews-43
+     image: g43/reviews
+     environment:
+      - SERVICE_VERSION=v1
+      - ENABLE_RATINGS=true
+      - STAR_COLOR=black  
     
 
