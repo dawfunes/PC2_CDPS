@@ -4,7 +4,7 @@
 # Pablo de la Cruz Gómez
 
 import logging, sys, subprocess, json
-from lib_PC2 import init_app, init_app_docker, destroy_app_docker
+from lib_PC2 import init_app, init_app_docker, destroy_app_docker, init_app_docker_compose
 
 def init_log():
     # Creacion y configuracion del logger
@@ -41,6 +41,10 @@ def main():
         elif order2 == "destroy":
             print("Eliminación de todas las imágenes y contenedores Docker")
             destroy_app_docker()
+    elif order == "p3":
+        print("Despliegue de la aplicación mediante Docker-Compose")
+        init_app_docker_compose()
+
 
 if __name__ == "__main__":
     main()
