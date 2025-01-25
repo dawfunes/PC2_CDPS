@@ -1,3 +1,4 @@
+# coding=utf-8
 # GRUPO 43
 # David Fuentes Martín
 # Víctor Nieto Palacios
