@@ -1,11 +1,11 @@
 version: '3.9'
 
 services:
-  productpage-g43:
+  product-page-g43:
     build: 
       context: .
       dockerfile: ProductPage/Dockerfile
-    container_name: productpage-g43
+    container_name: product-page-g43
     image: 
       productpage/g43
     ports: 
