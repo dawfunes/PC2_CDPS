@@ -4,7 +4,7 @@
 # Pablo de la Cruz Gómez
 
 import logging, sys, subprocess, json
-from lib_PC2 import init_app
+from lib_PC2 import init_app, init_app_docker
 
 def init_log():
     # Creacion y configuracion del logger
@@ -33,6 +33,9 @@ def main():
     if order == "p1":
         print("Despliegue de la aplicación en máquina virtual pesada")
         init_app(sys.argv[2] if len(sys.argv) > 2 else ports["app_port"], grupo)
+    elif order == "p2":
+        print("Despliegue de la aplicación mediante Docker")
+        init_app_docker()
 
 if __name__ == "__main__":
     main()

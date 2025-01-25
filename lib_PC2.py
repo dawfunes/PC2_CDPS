@@ -30,3 +30,6 @@ def init_app(port, grupo):
     subprocess.call(["pip3", "install", "-r", "requirements.txt"])
     subprocess.call(["python3", "productpage_monolith.py", f"{port}"])
 
+def init_app_docker():
+    subprocess.call(['sudo', 'docker', 'build', '-t', 'product-page/g43', '.'])
+    subprocess.call(['sudo', 'docker', 'run', '--name', 'product-page-g43', '-p', '9080:5080', '-e', 'GROUP_NUM=43', 'product-page/g43'])
