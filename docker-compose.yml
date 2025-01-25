@@ -1,42 +1,42 @@
-version: '3.9'
+version: '3'
 
 services:
-  product-page-g43:
-    build: 
+  productpage:
+    build:
       context: .
       dockerfile: ProductPage/Dockerfile
-    container_name: product-page-g43
-    image: 
-      productpage/g43
-    ports: 
+    environment:
+      GROUP_NUM: 43
+    ports:
       - "9080:9080"
-  details-g43:
-     build: 
+    container_name: "productpage-43"
+    image: "productpage/43"
+  
+  details:
+    build:
       context: .
       dockerfile: Details/Dockerfile
-     container_name: details-g43
-     image: 
-      details/g43
-     environment:
-      - SERVICE_VERSION=v1
-      - ENABLE_EXTERNAL_BOOK_SERVICE=true
+    environment:
+      SERVICE_VERSION: v1
+      ENABLE_EXTERNAL_BOOK_SERVICE: "true"
+    container_name: "details-43"
+    image: "details/43"
   
-  ratings-g43:
-     build: 
+  ratings:
+    build:
       context: .
       dockerfile: Ratings/Dockerfile
-     container_name: ratings-g43
-     image: 
-      ratings/g43
-     environment:
-      - SERVICE_VERSION=v1
-      - ENABLE_RATINGS=true
-  reviews-g43:
-     container_name: reviews-g43
-     image: reviews/g43
-     environment:
-      - SERVICE_VERSION=v1
-      - ENABLE_RATINGS=true
-      - STAR_COLOR=black  
+    environment:
+      SERVICE_VERSION: v1
+    container_name: "ratings-43"
+    image: "ratings/43"
+
+  reviews:
+    environment:
+      SERVICE_VERSION: v3
+      ENABLE_RATINGS: "true"
+      STAR_COLOR: red
+    container_name: "reviews-43"
+    image: "reviews/43"
     
 
