@@ -33,4 +33,5 @@ def main():
         print("Despliegue de la aplicación en máquina virtual pesada")
         init_app(sys.argv[2] if len(sys.argv) > 2 else ports["app_port"])
 
-    
+if __name__ == "__main__":
+    main()
