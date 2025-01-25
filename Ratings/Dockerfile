@@ -24,6 +24,3 @@ RUN npm install
 
 # Ejecutamos la aplicación 
 CMD ["node", "ratings.js", "9080"]
-
-# Indicamos que se ha instalado Ratings
-RUN echo "Ratings instalado"

@@ -1,12 +1,10 @@
 import subprocess, os
 
-# Guardar directorio raíz
-
 # Clonar repositorio de la app
 subprocess.call(['git', 'clone', 'https://github.com/CDPS-ETSIT/practica_creativa2.git'])
 
 # Crear la imagen de ProductPage
-subprocess.call(['docker', 'build', '-t', 'productpage/g43', './ProductPage'])
+subprocess.call(['docker', 'build', '-t', 'product-page/g43', './ProductPage'])
 print("Imagen de ProductPage creada")
 
 # Crear la imagen de Details
