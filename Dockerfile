@@ -11,4 +11,4 @@ RUN apt-get install -y git
 RUN git clone https://github.com/CDPS-ETSIT/practica_creativa2.git
 RUN pip install -r practica_creativa2/bookinfo/src/productpage/requirements.txt
 
-CMD ["python", "practica_creativa2/bookinfo/src/productpage/productpage.py"]
+CMD ["python", "practica_creativa2/bookinfo/src/productpage/productpage.py", "5080"]
