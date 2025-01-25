@@ -15,5 +15,18 @@ def init_app(port):
 
     # Cambiar de directorio
     os.chdir("practica_creativa2/bookinfo/src/productpage")
+
+    # Editar requirements.txt
+    # Reemplazar la línea que contiene 'requests==' por 'requests\n'
+    with open("requirements.txt", "r") as f:
+        lines = f.readlines()
+    with open("requirements.txt", "w") as f:
+        for line in lines:
+            if line.startswith("requests"):
+                f.write("requests\n")
+            else:
+                f.write(line)
+
+    subprocess.call(["pip3", "install", "-r", "requirements.txt"])
     subprocess.call(["python3", "productpage_monolith.py", f"{port}"])
 
