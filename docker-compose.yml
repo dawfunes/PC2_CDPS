@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ProductPage/Dockerfile
     environment:
-      GROUP_NUMBER: 43
+      GROUP_NUM: 43
     ports:
       - "9080:9080"
     container_name: "productpage-43"
