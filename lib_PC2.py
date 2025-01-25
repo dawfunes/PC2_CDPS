@@ -4,7 +4,7 @@
 # Víctor Nieto Palacios
 # Pablo de la Cruz Gómez
 
-import subprocess, os, logging
+import subprocess, os, logging, shutil
 
 def init_app(port, grupo):
     #log.debug("Iniciando la aplicación en la máquina virtual pesada")?¿¿?¿?¿
@@ -41,9 +41,55 @@ def destroy_app_docker():
     subprocess.call(['sudo', 'docker', 'rmi', 'product-page/g43'])
 
 def init_app_docker_compose():
-    init_images()
+    root = os.getcwd()
+    # Clonar repositorio de la app
+    subprocess.call(['git', 'clone', 'https://github.com/CDPS-ETSIT/practica_creativa2'])
 
-    subprocess.call(['docker-compose', 'up'])
+    # Escoger la version de la app
+    version = input("Escoge una versión (v1, v2, v3): ").strip()
+    if version not in ["v1", "v2", "v3"]:
+        print("Versión no válida. Por favor, elige entre v1, v2, v3.")
+        exit()
+
+    # Crea un nuevo docker-compose a partir del base
+    original_file = "docker-compose-base.yml"
+    new_file = f"docker-compose.yml"
+    shutil.copy(original_file, new_file)
+
+    # Define las variables en función de la versión
+    star_color = "red"
+    enable_ratings = "true"
+    if version == "v1":
+        enable_ratings = "false"
+    elif version == "v2":
+        star_color = "black"
+
+    # Añadir el servicio de reviews al docker-compose
+    reviews_service = f"""
+  reviews:
+    environment:
+        SERVICE_VERSION: {version}
+        ENABLE_RATINGS: "{enable_ratings}"
+        STAR_COLOR: {star_color}
+    container_name: \"reviews-43\"
+    image: \"reviews/43\"
+    """
+    with open(new_file, "a") as file:
+        file.write(reviews_service)
+
+    # Crear la imagen de Reviews, ejecutando antes el comando requerido
+    os.chdir('practica_creativa2/bookinfo/src/reviews')
+    dir = os.getcwd()
+    subprocess.call(['docker', 'run', '--rm', '-u', 'root', '-v', f'{dir}:/home/gradle/project', '-w', '/home/gradle/project', 'gradle:4.8.1', 'gradle', 'clean', 'build'])
+    subprocess.call(['docker', 'build', '-t', 'reviews/43', './reviews-wlpcfg'])
+
+    # Construir y levantar los contenedores con docker-compose
+    subprocess.call([f'docker-compose', 'build'])
+    subprocess.call([f'docker-compose', 'up', '-d'])
+
+def destroy_app_docker_compose():
+    subprocess.call(['docker-compose', 'down'])
+    os.remove("docker-compose.yml")
 
 def init_app_kubernetes():
     init_images()

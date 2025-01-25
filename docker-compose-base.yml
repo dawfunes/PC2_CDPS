@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: ProductPage/Dockerfile
     environment:
-      GROUP_NUM: 43
+      GROUP_NUMBER: 43
     ports:
       - "9080:9080"
     container_name: "productpage-43"
@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: Details/Dockerfile
     environment:
-      SERVICE_VERSION: v1
+      SERVICE_VERSION: v1ss
       ENABLE_EXTERNAL_BOOK_SERVICE: "true"
     container_name: "details-43"
     image: "details/43"
@@ -31,12 +31,5 @@ services:
     container_name: "ratings-43"
     image: "ratings/43"
 
-  reviews:
-    environment:
-      SERVICE_VERSION: v3
-      ENABLE_RATINGS: "true"
-      STAR_COLOR: red
-    container_name: "reviews-43"
-    image: "reviews/43"
-    
-
+  
+ 
