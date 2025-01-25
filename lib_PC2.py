@@ -63,3 +63,16 @@ def init_app_docker_compose():
     print("Imagen de Reviews creada")
 
     subprocess.call(['docker-compose', 'up'])
+
+def init_app_kubernetes():
+    os.chdir('kubernetes/deployments')
+    subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'review-v1.yaml'])
+    os.chdir('../services')
+    subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'review.yaml'])
+    

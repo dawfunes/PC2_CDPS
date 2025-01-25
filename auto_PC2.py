@@ -4,7 +4,7 @@
 # Pablo de la Cruz Gómez
 
 import logging, sys, subprocess, json
-from lib_PC2 import init_app, init_app_docker, destroy_app_docker, init_app_docker_compose
+from lib_PC2 import init_app, init_app_docker, destroy_app_docker, init_app_docker_compose, init_app_kubernetes
 
 def init_log():
     # Creacion y configuracion del logger
@@ -44,6 +44,9 @@ def main():
     elif order == "p3":
         print("Despliegue de la aplicación mediante Docker-Compose")
         init_app_docker_compose()
+    elif order == "p4":
+        print("Despliegue de la aplicación mediante Kubernetes")
+        init_app_kubernetes()
 
 
 if __name__ == "__main__":
