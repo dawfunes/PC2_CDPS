@@ -27,11 +27,12 @@ def pause():
 def main():
     ports = json.load(open('ports.json'))
     order = sys.argv[1]
+    grupo = 43
 
     # python3 auto_PC2.py p1 9080
     if order == "p1":
         print("Despliegue de la aplicación en máquina virtual pesada")
-        init_app(sys.argv[2] if len(sys.argv) > 2 else ports["app_port"])
+        init_app(sys.argv[2] if len(sys.argv) > 2 else ports["app_port"], grupo)
 
 if __name__ == "__main__":
     main()
