@@ -33,3 +33,8 @@ def init_app(port, grupo):
 def init_app_docker():
     subprocess.call(['sudo', 'docker', 'build', '-t', 'product-page/g43', '.'])
     subprocess.call(['sudo', 'docker', 'run', '--name', 'product-page-g43', '-p', '9080:5080', '-e', 'GROUP_NUM=43', 'product-page/g43'])
+
+def destroy_app_docker():
+    subprocess.call(['sudo', 'docker', 'stop', 'product-page-g43'])
+    subprocess.call(['sudo', 'docker', 'rm', 'product-page-g43'])
+    subprocess.call(['sudo', 'docker', 'rmi', 'product-page/g43'])
