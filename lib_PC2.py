@@ -40,7 +40,26 @@ def destroy_app_docker():
     subprocess.call(['sudo', 'docker', 'rmi', 'product-page/g43'])
 
 def init_app_docker_compose():
-    # Clonar repositorio de la app
+    init_images()
+
+    subprocess.call(['docker-compose', 'up'])
+
+def init_app_kubernetes():
+    init_images()
+    os.chdir('kubernetes/deployments')
+    subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'review-v1.yaml'])
+    os.chdir('../services')
+    subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'review.yaml'])
+    
+
+def init_images():
+        # Clonar repositorio de la app
     subprocess.call(['git', 'clone', 'https://github.com/CDPS-ETSIT/practica_creativa2.git'])
 
     # Crear la imagen de ProductPage
@@ -61,18 +80,3 @@ def init_app_docker_compose():
     subprocess.call(['docker', 'run', '--rm', '-u', 'root', '-v', f'{dir}:/home/gradle/project', '-w', '/home/gradle/project', 'gradle:4.8.1', 'gradle', 'clean', 'build'])
     subprocess.call(['docker', 'build', '-t', 'reviews/g43', 'D:/Escritorio/PC2_CDPS/practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg'])
     print("Imagen de Reviews creada")
-
-    subprocess.call(['docker-compose', 'up'])
-
-def init_app_kubernetes():
-    os.chdir('kubernetes/deployments')
-    subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'review-v1.yaml'])
-    os.chdir('../services')
-    subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'review.yaml'])
-    
