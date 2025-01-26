@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: reviews
-        image: reviews/g43
+        image: Zohard02/reviews-v2
         ports:
         - containerPort: 9080
         env:

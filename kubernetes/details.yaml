@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: details
-        image: details/43
+        image: Zohard02/details
         ports:
         - containerPort: 9080
         env:
@@ -22,3 +22,16 @@ spec:
           value: "v1"
         - name: ENABLE_EXTERNAL_BOOK_SERVICE
           value: "true"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: details
+spec:
+  selector:
+    app: details
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9080
+  type: ClusterIP
