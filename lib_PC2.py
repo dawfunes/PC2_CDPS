@@ -9,7 +9,11 @@ import subprocess, os, logging, shutil
 def init_app(port, grupo):
     #log.debug("Iniciando la aplicación en la máquina virtual pesada")?¿¿?¿?¿
     # Clonar repositorio con la aplicación
-    subprocess.call(["git", "clone", "https://github.com/CDPS-ETSIT/practica_creativa2.git"])
+    if not os.path.isdir('practica_creativa2'):
+        subprocess.call(["git", "clone", "https://github.com/CDPS-ETSIT/practica_creativa2.git"])
+    else:
+        print("Repositorio ya clonado")
+    
 
     #inspeccionar el código de la aplicación para que en el título de la página aparezca el nombre del grupo que está realizando la práctica. Este valor deberá obtenerse por medio de la variable de entorno <GROUP_NUM>. También deberá arrancar la aplicación en un puerto diferente al predeterminado.
     subprocess.call(["find", "./", "-type", "f", "-exec", "sed", "-i", f"s/Simple Bookstore App/Grupo {grupo} - Simple Bookstore App/g", "{}", ";"])
@@ -41,16 +45,17 @@ def destroy_app_docker():
     subprocess.call(['sudo', 'docker', 'rmi', 'product-page/g43'])
 
 def init_app_docker_compose():
-    root = os.getcwd()
     # Clonar repositorio de la app
-    subprocess.call(['git', 'clone', 'https://github.com/CDPS-ETSIT/practica_creativa2'])
-
+    if not os.path.isdir('practica_creativa2'):
+        subprocess.call(["git", "clone", "https://github.com/CDPS-ETSIT/practica_creativa2.git"])
+    else:
+        print("Repositorio ya clonado")
     # Escoger la version de la app
     version = input("Escoge una versión (v1, v2, v3): ").strip()
     if version not in ["v1", "v2", "v3"]:
-        print("Versión no válida. Por favor, elige entre v1, v2, v3.")
-        exit()
-
+        print("Versión no válida, se elegirá la versión v3 por defecto.")
+        version = "v3"
+    print(f"Ejecutando la versión {version}")
     # Crea un nuevo docker-compose a partir del base
     original_file = "docker-compose-base.yml"
     new_file = f"docker-compose.yml"
@@ -105,6 +110,10 @@ def init_app_kubernetes():
     subprocess.call(['kubectl', 'apply', '-f', 'review.yaml'])
     
 
+###############################################################################################################
+## NO SE SI ESTO TIENE QUE ESTAR. SE PUEDE HACER CON EL INIT-DOCKER-COMPOSE?. NO ESTOY SEGURO DE QUE HAYA QUE ##
+## CONSTRUIR CONTENEDORES ANTES DE METERSELOS A KUBERNETES. A LO MEJOR HAY QUE METERLE SOLO LAS IMAGENES.####
+###############################################################################################################
 def init_images():
         # Clonar repositorio de la app
     subprocess.call(['git', 'clone', 'https://github.com/CDPS-ETSIT/practica_creativa2.git'])

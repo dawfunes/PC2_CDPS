@@ -37,15 +37,15 @@ def main():
     elif order == "p2":
         order2 = sys.argv[2]
         if order2 == "start":
-            print("Despliegue de la aplicación mediante Docker")
+            print("Despliegue de la aplicación monolítica mediante Docker")
             init_app_docker()
         elif order2 == "destroy":
-            print("Eliminación de todas las imágenes y contenedores Docker")
+            print("Eliminación de la imagen y contenedor Docker")
             destroy_app_docker()
     elif order == "p3":
         order2 = sys.argv[2]
         if order2 == "start":
-            print("Despliegue de la aplicación mediante Docker")
+            print("Despliegue de la aplicación multiservicio mediante docker-compose")
             init_app_docker_compose()
         elif order2 == "destroy":
             print("Eliminación de todas las imágenes y contenedores Docker")
