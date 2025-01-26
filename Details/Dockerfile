@@ -8,7 +8,7 @@ ENV SERVICE_VERSION=v1
 ENV ENABLE_EXTERNAL_BOOK_SERVICE=true
 
 # Copiamos el archivo details.rb al contenedor
-COPY practica_creativa2/bookinfo/src/details/details.rb /opt/microservices
+COPY ../practica_creativa2/bookinfo/src/details/details.rb /opt/microservices
 
 # Indica el puerto accesible
 EXPOSE 9080
