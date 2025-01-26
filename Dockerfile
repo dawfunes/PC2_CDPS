@@ -4,7 +4,7 @@ FROM python:3.7.7-slim
 EXPOSE 5080
 
 # Variable de entorno
-ENV GROUP_NUM=43
+ENV GROUP_NUM=g43
 
 WORKDIR /app
 

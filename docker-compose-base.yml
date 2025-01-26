@@ -6,21 +6,21 @@ services:
       context: .
       dockerfile: ProductPage/Dockerfile
     environment:
-      GROUP_NUMBER: 43
+      GROUP_NUM: g43
     ports:
       - "9080:9080"
-    container_name: "productpage-43"
-    image: "productpage/43"
+    container_name: "product-page-g43"
+    image: "product-page/g43"
   
   details:
     build:
       context: .
       dockerfile: Details/Dockerfile
     environment:
-      SERVICE_VERSION: v1ss
+      SERVICE_VERSION: v1
       ENABLE_EXTERNAL_BOOK_SERVICE: "true"
-    container_name: "details-43"
-    image: "details/43"
+    container_name: "details-g43"
+    image: "details/g43"
   
   ratings:
     build:
@@ -28,8 +28,8 @@ services:
       dockerfile: Ratings/Dockerfile
     environment:
       SERVICE_VERSION: v1
-    container_name: "ratings-43"
-    image: "ratings/43"
+    container_name: "ratings-g43"
+    image: "ratings/g43"
 
   
  
