@@ -1,4 +1,4 @@
-apiVersion: apps/v3
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: reviews-v3
@@ -22,11 +22,11 @@ spec:
         env:
         - name: SERVICE_VERSION
           value: "v3"
-        - name: ENABLE_RATING
-          value: "false"
+        - name: ENABLE_RATINGS
+          value: "true"
         - name: STAR_COLOR
           value: "red"
-
+---
 apiVersion: v1
 kind: Service
 metadata:

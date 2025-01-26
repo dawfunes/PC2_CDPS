@@ -22,18 +22,18 @@ spec:
         env:
         - name: SERVICE_VERSION
           value: "v1"
-        - name: ENABLE_RATING
+        - name: ENABLE_RATINGS
           value: "false"
         - name: STAR_COLOR
           value: "red"
-
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: reviews-v1
+  name: reviews
 spec:
   selector:
-    app: reviews-v1
+    app: reviews
   ports:
     - protocol: TCP
       port: 9080
