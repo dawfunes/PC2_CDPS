@@ -4,14 +4,14 @@ FROM python:3.7.7-slim
 # Establecemos el directorio de trabajo
 WORKDIR /app
 
-ENV GROUP_NUM=g43
+ENV GROUP_NUM=43
 
 # Copiamos el directorio productpage al contenedor e instalamos los requirements
 COPY ../practica_creativa2/bookinfo/src/productpage/ /app
 RUN pip install -r requirements.txt 
 
 # Añade el numero del grupo al título de la pagina
-RUN sed -i "s/Simple Bookstore App/${GROUP_NUM}/g" templates/productpage.html
+RUN sed -i "s/Simple Bookstore App/Grupo ${GROUP_NUM}/g" templates/productpage.html
 
 # Indica el puerto accesible
 EXPOSE 9080
