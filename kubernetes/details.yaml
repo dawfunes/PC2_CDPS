@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: details
-        image: Zohard02/details
+        image: zohard02/details
         ports:
         - containerPort: 9080
         env:

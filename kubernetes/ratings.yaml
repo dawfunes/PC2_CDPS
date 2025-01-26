@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: ratings
-        image: Zohard02/ratings
+        image: zohard02/ratings
         ports:
         - containerPort: 9080
         env:
