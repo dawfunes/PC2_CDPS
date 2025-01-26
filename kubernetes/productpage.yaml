@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: productpage
-        image: zohard02/productpage
+        image: victornp/productpage
         ports:
         - containerPort: 9080
         env:

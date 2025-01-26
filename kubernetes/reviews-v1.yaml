@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: reviews
-        image: zohard02/reviews-v1
+        image: victornp/reviews-v1
         ports:
         - containerPort: 9080
         env:
