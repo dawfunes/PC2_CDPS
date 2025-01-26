@@ -103,10 +103,13 @@ def destroy_app_docker_compose():
     os.remove("docker-compose.yml")
 
 def init_app_kubernetes():
+    version = input("Escoge una versión (v1, v2, v3): ").strip()
+    if version not in ["v1", "v2", "v3"]:
+        print("Versión no válida, se elegirá la versión v3 por defecto.")
+        version = "v3"
     os.chdir('kubernetes')
     subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
     subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
     subprocess.call(['kubectl', 'apply', '-f', 'ratings.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'reviews.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'reviews-v1.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', f'reviews-{version}.yaml'])
     

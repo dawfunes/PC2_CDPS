@@ -15,10 +15,27 @@ spec:
         version: v1
     spec:
       containers:
-      - name: reviews
+      - name: reviews-g43
         image: victornp/reviews-v1
         ports:
         - containerPort: 9080
         env:
         - name: SERVICE_VERSION
           value: "v1"
+        - name: ENABLE_RATING
+          value: "false"
+        - name: STAR_COLOR
+          value: "red"
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: reviews-v1
+spec:
+  selector:
+    app: reviews-v1
+  ports:
+    - protocol: TCP
+      port: 9080
+      targetPort: 9080
+  type: ClusterIP
