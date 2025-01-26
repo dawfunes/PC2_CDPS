@@ -4,12 +4,16 @@ FROM python:3.7.7-slim
 EXPOSE 5080
 
 # Variable de entorno
-ENV GROUP_NUM = UNDEFINED
+ENV GROUP_NUM=43
 
-RUN apt-get update && \
-    apt-get install -y git && \
-    git clone https://github.com/CDPS-ETSIT/practica_creativa2 && \
-    sed -i 's/^requests==.*/requests/' practica_creativa2/bookinfo/src/productpage/requirements.txt && \
-    pip install -r practica_creativa2/bookinfo/src/productpage/requirements.txt
+WORKDIR /app
 
-CMD ["python", "practica_creativa2/bookinfo/src/productpage/productpage_monolith.py", "5080"]
+COPY ../practica_creativa2/bookinfo/src/productpage/ /app
+
+RUN sed -i 's/^requests==.*/requests/' requirements.txt && \
+    pip install -r requirements.txt
+    
+#Pasar la variable de entorno <GROUP_NUM> al contenedor para que se muestre en el título de la página.
+RUN sed -i "s/Simple Bookstore App/${GROUP_NUM}/g" templates/productpage.html
+
+CMD ["python", "productpage_monolith.py", "5080"]

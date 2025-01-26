@@ -36,13 +36,19 @@ def init_app(port, grupo):
     subprocess.call(["python3", "productpage_monolith.py", f"{port}"])
 
 def init_app_docker():
-    subprocess.call(['sudo', 'docker', 'build', '-t', 'product-page/g43', '.'])
-    subprocess.call(['sudo', 'docker', 'run', '--name', 'product-page-g43', '-p', '9080:5080', '-e', 'GROUP_NUM=43', '-d', 'product-page/g43'])
+    # Clonar repositorio de la app
+    if not os.path.isdir('practica_creativa2'):
+        subprocess.call(["git", "clone", "https://github.com/CDPS-ETSIT/practica_creativa2.git"])
+    else:
+        print("Repositorio ya clonado")
+
+    subprocess.call(['docker', 'build', '-t', 'product-page/g43', '.'])
+    subprocess.call(['docker', 'run', '--name', 'product-page-g43', '-p', '9080:5080', '-e', 'GROUP_NUM=43', '-d', 'product-page/g43'])
 
 def destroy_app_docker():
-    subprocess.call(['sudo', 'docker', 'stop', 'product-page-g43'])
-    subprocess.call(['sudo', 'docker', 'rm', 'product-page-g43'])
-    subprocess.call(['sudo', 'docker', 'rmi', 'product-page/g43'])
+    subprocess.call(['docker', 'stop', 'product-page-g43'])
+    subprocess.call(['docker', 'rm', 'product-page-g43'])
+    subprocess.call(['docker', 'rmi', 'product-page/g43'])
 
 def init_app_docker_compose():
     # Clonar repositorio de la app
