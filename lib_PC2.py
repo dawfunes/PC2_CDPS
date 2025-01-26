@@ -112,4 +112,7 @@ def init_app_kubernetes():
     subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
     subprocess.call(['kubectl', 'apply', '-f', 'ratings.yaml'])
     subprocess.call(['kubectl', 'apply', '-f', f'reviews-{version}.yaml'])
-    
+    subprocess.call(['minikube', 'tunnel'])
+
+def destroy_app_kubernetes():
+    subprocess.call(['kubectl', 'delete', 'all', '--all'])

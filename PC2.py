@@ -5,7 +5,7 @@
 # Pablo de la Cruz Gómez
 
 import logging, sys, subprocess, json
-from lib_PC2 import init_app, init_app_docker, destroy_app_docker, init_app_docker_compose, init_app_kubernetes, destroy_app_docker_compose
+from lib_PC2 import init_app, init_app_docker, destroy_app_docker, init_app_docker_compose, init_app_kubernetes, destroy_app_docker_compose, destroy_app_kubernetes
 
 def init_log():
     # Creacion y configuracion del logger
@@ -51,9 +51,15 @@ def main():
             print("Eliminación de todas las imágenes y contenedores Docker")
             destroy_app_docker_compose()
     elif order == "p4":
-        print("Despliegue de la aplicación mediante Kubernetes")
-        init_app_kubernetes()
+        
+        
+        order2 = sys.argv[2]
+        if order2 == "start":
+            print("Despliegue de la aplicación mediante Kubernetes")
+            init_app_kubernetes()
 
+        elif order2 == "destroy":
+            destroy_app_kubernetes()
 
 if __name__ == "__main__":
     main()
