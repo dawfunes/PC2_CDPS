@@ -103,42 +103,10 @@ def destroy_app_docker_compose():
     os.remove("docker-compose.yml")
 
 def init_app_kubernetes():
-    init_images()
-    os.chdir('kubernetes/deployments')
+    os.chdir('kubernetes')
     subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
     subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'review-v1.yaml'])
-    os.chdir('../services')
-    subprocess.call(['kubectl', 'apply', '-f', 'productpage.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'details.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'rating.yaml'])
-    subprocess.call(['kubectl', 'apply', '-f', 'review.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'ratings.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'reviews.yaml'])
+    subprocess.call(['kubectl', 'apply', '-f', 'reviews-v1.yaml'])
     
-
-###############################################################################################################
-## NO SE SI ESTO TIENE QUE ESTAR. SE PUEDE HACER CON EL INIT-DOCKER-COMPOSE?. NO ESTOY SEGURO DE QUE HAYA QUE ##
-## CONSTRUIR CONTENEDORES ANTES DE METERSELOS A KUBERNETES. A LO MEJOR HAY QUE METERLE SOLO LAS IMAGENES.####
-###############################################################################################################
-def init_images():
-        # Clonar repositorio de la app
-    subprocess.call(['git', 'clone', 'https://github.com/CDPS-ETSIT/practica_creativa2.git'])
-
-    # Crear la imagen de ProductPage
-    subprocess.call(['docker', 'build', '-t', 'productpage/g43', './ProductPage'])
-    print("Imagen de ProductPage creada")
-
-    # Crear la imagen de Details
-    subprocess.call(['docker', 'build', '-t', 'details/g43', './Details'])
-    print("Imagen de Details creada")
-
-    # Crear la imagen de Ratings
-    subprocess.call(['docker', 'build', '-t', 'ratings/g43', './Ratings'])
-    print("Imagen de Ratings creada")
-
-    # Crear la imagen de Reviews
-    os.chdir('practica_creativa2/bookinfo/src/reviews')
-    dir = os.getcwd()
-    subprocess.call(['docker', 'run', '--rm', '-u', 'root', '-v', f'{dir}:/home/gradle/project', '-w', '/home/gradle/project', 'gradle:4.8.1', 'gradle', 'clean', 'build'])
-    subprocess.call(['docker', 'build', '-t', 'reviews/g43', 'D:/Escritorio/PC2_CDPS/practica_creativa2/bookinfo/src/reviews/reviews-wlpcfg'])
-    print("Imagen de Reviews creada")

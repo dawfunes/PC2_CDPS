@@ -1,22 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: productpage
+  name: reviews-v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: productpage
+      app: reviews
+      version: v1
   template:
     metadata:
       labels:
-        app: productpage
+        app: reviews
+        version: v1
     spec:
       containers:
-      - name: productpage
-        image: productpage/g43
+      - name: reviews
+        image: zohard02/reviews-v1
         ports:
         - containerPort: 9080
         env:
-        - name: GROUP_NUM
-          value: "1"
+        - name: SERVICE_VERSION
+          value: "v1"

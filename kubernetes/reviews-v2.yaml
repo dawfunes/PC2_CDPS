@@ -1,24 +1,24 @@
-apiVersion: apps/v1
+apiVersion: apps/v2
 kind: Deployment
 metadata:
-  name: reviews-v1
+  name: reviews-v2
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: reviews
-      version: v1
+      version: v2
   template:
     metadata:
       labels:
         app: reviews
-        version: v1
+        version: v2
     spec:
       containers:
       - name: reviews
-        image: reviews/g43
+        image: zohard02/reviews-v2
         ports:
         - containerPort: 9080
         env:
         - name: SERVICE_VERSION
-          value: "v1"
+          value: "v2"
