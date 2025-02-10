@@ -1,7 +1,7 @@
 # PC2_CDPS
 
 El comando para iniciar cada parte es:  
-py PC2.py <pX> <start/destroy>
+py PC2.py &lt;pX&gt; <start/destroy>
 
 1. Lanza la aplicación monolítica desde una máquina virtual  
    py PC2.py p1 start        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; # Inicia la aplicación  
